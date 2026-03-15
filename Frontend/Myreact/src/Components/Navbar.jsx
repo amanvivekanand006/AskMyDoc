@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <span className="logo-text">Docu<span>Intel</span></span>
+        <span className="logo-text">AskMy<span>Doc</span></span>
       </div>
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>

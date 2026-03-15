@@ -9,7 +9,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 load_dotenv()
 
 embedding = HuggingFaceEmbeddings()
-TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
 class Message(BaseModel):
@@ -21,16 +21,18 @@ class ChatRequest(BaseModel):
 
 
 def ask_llama2(messages: list):
-    url = "https://api.together.xyz/v1/chat/completions"
+    url = "https://api.groq.com/openai/v1/chat/completions"
+
     headers = {
-        "Authorization": f"Bearer {TOGETHER_API_KEY}",
+        "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
     }
     formatted_messages = [
         msg.dict() if isinstance(msg, Message) else msg for msg in messages
     ]
     data = {
-        "model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",  
+        # "model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",  
+        "model": "llama-3.1-8b-instant",  
         "messages": formatted_messages,
         "temperature": 0.7,
         "max_tokens": 300

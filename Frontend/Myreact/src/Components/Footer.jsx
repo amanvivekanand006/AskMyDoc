@@ -16,7 +16,7 @@ function Footer() {
       </div>
 
       <div className="footer-container">
-        <div className="footer-logo">DocuIntel<span style={{ color: '#f1b814' }}>!</span></div>
+        <div className="footer-logo">AskMyDoc<span style={{ color: '#f1b814' }}>!</span></div>
         <div className="footer-links">
           <a href="#">Features</a>
           <a href="#">Pricing</a>
@@ -26,7 +26,7 @@ function Footer() {
           <a href="#">Contact</a>
         </div>
         <div className="footer-bottom">
-          © 2025 DocuIntel. All rights reserved.
+          © 2025 AskMyDoc. All rights reserved.
         </div>
       </div>
     </footer>

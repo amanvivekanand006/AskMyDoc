@@ -69,7 +69,7 @@ const LoginComponent = () => {
             className="background-image"
           />
           <div className="left-content">
-            <h1>DocuIntel</h1>
+            <h1>AskMyDoc</h1>
             <p>Intelligent Document Insights Platform.</p>
           </div>
         </div>
