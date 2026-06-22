@@ -21,7 +21,11 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  
+    allow_origins=[
+        "https://docu-intel-assignment-nxd6.vercel.app/",
+        "http://localhost:5173",  # for local development
+        "http://localhost:3000",  # for local development
+    ],  
     allow_credentials=True, 
     allow_methods=["*"],  
     allow_headers=["*"], 
