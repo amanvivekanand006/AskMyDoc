@@ -16,7 +16,6 @@ import random
 import os
 import tempfile
 from io import BytesIO
-from unstructured.partition.auto import partition
 from langchain_core.documents import Document
 from pinecone import Pinecone
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -38,6 +37,7 @@ api_router = APIRouter()
 # from fastapi.responses import StreamingResponse
 # import phonenumbers
 # from fastapi.middleware.cors import CORSMiddleware
+# from unstructured.partition.auto import partition
 # from unstructured.partition.pdf import partition_pdf
 # from unstructured.partition.docx import partition_docx
 # from unstructured.partition.text import partition_text
