@@ -21,10 +21,10 @@ unstructured==0.18.11
 python-docx==1.2.0
 pypdf==6.0.0
 
-langchain==0.3.27
-langchain-core==0.3.74
-langchain-community==0.3.29
-langchain-text-splitters==0.3.9
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
 
 pinecone==7.3.0
 
