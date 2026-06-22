@@ -41,14 +41,41 @@ def parse_uploaded_file(file_bytes: bytes, filename: str):
     with open(file_path, "wb") as f:
         f.write(file_bytes)
 
-    elements = partition(filename=file_path)
-    text = "\n".join(
-            str(element)
-            for element in elements
-            if str(element).strip()
-            )
+    ext = os.path.splitext(filename)[1].lower()
+
+    if ext == ".pdf":
+        from pypdf import PdfReader
+        reader = PdfReader(file_path)
+        text = "\n".join(
+            page.extract_text() for page in reader.pages
+            if page.extract_text()
+        )
+
+    elif ext == ".docx":
+        import docx
+        doc = docx.Document(file_path)
+        text = "\n".join(
+            para.text for para in doc.paragraphs
+            if para.text.strip()
+        )
+
+    elif ext == ".txt":
+        with open(file_path, "r", encoding="utf-8") as f:
+            text = f.read()
+
+    else:
+        raise ValueError(f"Unsupported file type: {ext}")
 
     return text
+
+    # elements = partition(filename=file_path)
+    # text = "\n".join(
+    #         str(element)
+    #         for element in elements
+    #         if str(element).strip()
+    #         )
+
+    # return text
     # extracted_data = [str(element) for element in elements]
 
     # return extracted_data
