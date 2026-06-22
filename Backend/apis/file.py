@@ -116,26 +116,26 @@ async def upload_file(file: UploadFile = File(...)):
 
 
 
-@api_router.get("/view_file", tags=["File"])
-async def get_file(id:str):
-    try:
-        oid = ObjectId(id)
-        file = await get_file_from_gridfs(oid)
+# @api_router.get("/view_file", tags=["File"])
+# async def get_file(id:str):
+#     try:
+#         oid = ObjectId(id)
+#         file = await get_file_from_gridfs(oid)
 
-        file_info = await db.fs.files.find_one({"_id": oid})
-        if not file_info:
-            raise HTTPException(status_code=404, detail="File not found")
+#         file_info = await db.fs.files.find_one({"_id": oid})
+#         if not file_info:
+#             raise HTTPException(status_code=404, detail="File not found")
         
-        content_type = file_info.get("contentType", "application/octet-stream")
-        filename = file_info.get("filename", "file")
+#         content_type = file_info.get("contentType", "application/octet-stream")
+#         filename = file_info.get("filename", "file")
         
-        return StreamingResponse(
-            file,
-            media_type=content_type,
-            headers={"Content-Disposition": f"inline; filename={filename}"}
-        )
-    except Exception as e:
-        raise HTTPException(status_code=404, detail=str(e))
+#         return StreamingResponse(
+#             file,
+#             media_type=content_type,
+#             headers={"Content-Disposition": f"inline; filename={filename}"}
+#         )
+#     except Exception as e:
+#         raise HTTPException(status_code=404, detail=str(e))
     
 
 
