@@ -26,10 +26,23 @@ from unstructured.partition.text import partition_text
 from unstructured.partition.auto import partition
 
 
-from langchain.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.schema import Document
+# from langchain.vectorstores import FAISS
+# from langchain.embeddings import HuggingFaceEmbeddings
+# from langchain.schema import Document
+from langchain_core.documents import Document
 
+
+from pinecone import Pinecone
+from langchain_community.document_loaders import PyPDFLoader
+# from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_google_genai import (
+    GoogleGenerativeAIEmbeddings,
+    ChatGoogleGenerativeAI
+)
+from langchain_pinecone import PineconeVectorStore
+from langchain_core.prompts import PromptTemplate
+from google import genai
 
 api_router = APIRouter()
 

@@ -30,3 +30,6 @@ frontend/my-react/.env
 # OS specific
 .DS_Store
 Thumbs.db
+
+
+Backend/.env

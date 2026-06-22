@@ -1,15 +1,26 @@
 from . import *
 from . database import *
 import requests
-from langchain.vectorstores import FAISS
-# from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.schema import Document
-from langchain_huggingface import HuggingFaceEmbeddings
+# from langchain.vectorstores import FAISS
+# # from langchain.embeddings import HuggingFaceEmbeddings
+# from langchain.schema import Document
+# from langchain_huggingface import HuggingFaceEmbeddings
 
 load_dotenv()
 
-embedding = HuggingFaceEmbeddings()
+# embedding = HuggingFaceEmbeddings()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+pine_cone_key = os.getenv("PINE_CONE_API_KEY")
+Gen_Ai_key = os.getenv("GEN_AI_API_KEY")
+
+pc = Pinecone(api_key=pine_cone_key)
+
+index = pc.Index("practice")
+
+
+
+
 
 
 class Message(BaseModel):
@@ -47,40 +58,132 @@ def ask_llama2(messages: list):
     except Exception as e:
         return f"❌ Error: {str(e)}\nRaw Response: {response.text}"
 
+
+
+
+
 @api_router.post("/chat", tags=["Chatbot"])
 async def chat_with_context(request: ChatRequest):
     file_id = request.file_id
     messages = request.messages
 
-    vectorstore = FAISS.load_local(
-        f"vector_index_{file_id}",
-        embedding,
-        allow_dangerous_deserialization=True
-    )
-    retriever = vectorstore.as_retriever()
+    llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    google_api_key=Gen_Ai_key
+)
+
+    embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001",
+    google_api_key=Gen_Ai_key
+)
+    vector_store = PineconeVectorStore(
+    index=index,
+    embedding=embeddings
+)   
+    retriever = vector_store.as_retriever(
+    search_kwargs={
+        "k": 5,
+        "filter": {
+            "file_id": request.file_id
+        }
+    }
+)
+    
+    # vectorstore = FAISS.load_local(
+    #     f"vector_index_{file_id}",
+    #     embedding,
+    #     allow_dangerous_deserialization=True
+    # )
+    # retriever = vectorstore.as_retriever()
     
     # Using only latest message to fetch relevant docs
     user_question = messages[-1].content
-    docs = retriever.get_relevant_documents(user_question)
+    # docs = retriever.get_relevant_documents(user_question)
+    docs = retriever.invoke(user_question)
     context = "\n".join([doc.page_content for doc in docs])
 
     # Injecting context into latest user message
     messages[-1] = Message(
         role=messages[-1].role,
-        content=f"""Use this content:\n{context}\n\nUser question:\n{user_question}"""
+        content=f"""
+Use only the provided context.
+
+Context:
+{context}
+
+Question:
+{user_question}
+"""
+        # content=f"""Use this content:\n{context}\n\nUser question:\n{user_question}"""
     )
     # Ask the LLM
-    answer = ask_llama2(messages)
+    # answer = ask_llama2(messages)
+    response = llm.invoke(messages[-1].content)
+
+    answer = response.content
+
     return {
     "messages": [msg.dict() for msg in messages] + [{"role": "assistant", "content": answer}]
      }
 
-@api_router.post("/generate_questions",tags=["Chatbot"])
-async def generate_questions_api(file_id: str):
-    chunks = await parsed_data_col.find({"file_id": file_id}).to_list(None)
-    content = "\n".join([chunk['chunk'] for chunk in chunks])
 
-    prompt = f"Generate 5 multiple-choice questions from the following content:\n\n{content}"
-    questions = ask_llama2(prompt)
 
-    return {"questions": questions}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @api_router.post("/chat", tags=["Chatbot"])
+# async def chat_with_context(request: ChatRequest):
+#     file_id = request.file_id
+#     messages = request.messages
+
+#     vectorstore = FAISS.load_local(
+#         f"vector_index_{file_id}",
+#         embedding,
+#         allow_dangerous_deserialization=True
+#     )
+#     retriever = vectorstore.as_retriever()
+    
+#     # Using only latest message to fetch relevant docs
+#     user_question = messages[-1].content
+#     docs = retriever.get_relevant_documents(user_question)
+#     context = "\n".join([doc.page_content for doc in docs])
+
+#     # Injecting context into latest user message
+#     messages[-1] = Message(
+#         role=messages[-1].role,
+#         content=f"""Use this content:\n{context}\n\nUser question:\n{user_question}"""
+#     )
+#     # Ask the LLM
+#     answer = ask_llama2(messages)
+#     return {
+#     "messages": [msg.dict() for msg in messages] + [{"role": "assistant", "content": answer}]
+#      }
+
+
+
+# @api_router.post("/generate_questions",tags=["Chatbot"])
+# async def generate_questions_api(file_id: str):
+#     chunks = await parsed_data_col.find({"file_id": file_id}).to_list(None)
+#     content = "\n".join([chunk['chunk'] for chunk in chunks])
+
+#     prompt = f"Generate 5 multiple-choice questions from the following content:\n\n{content}"
+#     questions = ask_llama2(prompt)
+
+#     return {"questions": questions}
