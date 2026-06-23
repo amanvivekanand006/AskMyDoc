@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Css/Popup.css';
-import bot from '../assets/Bot.ai2.png';
+import bot from '../assets/BOT.ai2.png';
 
 const FreeVersionPopup = ({ isOpen = true, onClose }) => {
   const [showPopup, setShowPopup] = useState(isOpen);
