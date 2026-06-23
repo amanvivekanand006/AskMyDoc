@@ -1,3 +1,5 @@
+
+
 ul {
   margin: 0;
   padding: 0;
@@ -7,6 +9,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/* =====================
+   NAVBAR
+   ===================== */
 
 .navbar {
   display: flex;
@@ -19,17 +25,102 @@ a {
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: box-shadow 0.3s ease, padding 0.3s ease;
 }
 
+/* Slightly compact + deeper shadow on scroll */
+.navbar--scrolled {
+  padding: 0.85rem 3rem;
+  box-shadow: 0 6px 20px rgba(73, 11, 61, 0.1);
+}
+
+/* =====================
+   LOGO
+   ===================== */
+
+.navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Icon bubble */
+.logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.6rem;
+  background: linear-gradient(135deg, #490b3d, #bd1e51);
+  color: #ffffff;
+  flex-shrink: 0;
+
+  /* Entry animation */
+  animation: logoPopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Logo text */
 .navbar-logo .logo-text {
   font-size: 1.8rem;
   font-weight: bold;
   color: #bd1e51;
+  animation: logoSlideIn 0.5s ease both;
+  animation-delay: 0.1s;
 }
 
 .navbar-logo .logo-text span {
   color: #f1b814;
 }
+
+/* Hover: icon pulse + text lift */
+.navbar-logo:hover .logo-icon {
+  animation: logoPulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.navbar-logo:hover .logo-text {
+  transform: translateX(2px);
+  transition: transform 0.2s ease;
+}
+
+/* =====================
+   KEYFRAMES
+   ===================== */
+
+@keyframes logoPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes logoSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes logoPulse {
+  0%   { transform: scale(1) rotate(0deg); }
+  40%  { transform: scale(1.18) rotate(-6deg); }
+  70%  { transform: scale(0.95) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* =====================
+   NAV LINKS
+   ===================== */
 
 .navbar-links {
   display: flex;
@@ -40,11 +131,34 @@ a {
   font-size: 1rem;
   color: #bd1e51;
   transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+/* Underline slide-in on hover */
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #490b3d;
+  border-radius: 9999px;
+  transition: width 0.25s ease;
 }
 
 .navbar-links a:hover {
   color: #490b3d;
 }
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+/* =====================
+   ACTIONS
+   ===================== */
 
 .navbar-actions {
   display: flex;
@@ -54,11 +168,13 @@ a {
 .btn-login,
 .btn-signup {
   padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .btn-login {
@@ -70,6 +186,7 @@ a {
 .btn-login:hover {
   background: #490b3d;
   color: white;
+  border-color: #490b3d;
 }
 
 .btn-signup {
@@ -79,4 +196,53 @@ a {
 
 .btn-signup:hover {
   background-color: #490b3d;
+}
+
+.logout-btn {
+  background-color: #bd1e51;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #490b3d;
+}
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .navbar--scrolled {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .navbar-links {
+    gap: 1.25rem;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 0.25rem;
+  }
+
+  .navbar-links a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-actions {
+    gap: 0.5rem;
+  }
+
+  .btn-login,
+  .btn-signup {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
 }

@@ -141,3 +141,11 @@ async def users_login(form_data: OAuth2PasswordRequestForm = Depends()):
     else :
         raise HTTPException(status_code=401, detail="Invalid email or password")
     
+
+
+
+
+
+@api_router.get("/health", tags=["Trigger Server"])
+async def health():
+    return {"status": "ok"}

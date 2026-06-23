@@ -1,30 +1,69 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Css/Navbar.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem('access_token'); // Or replace 'token' with your actual login key
+  const location = useLocation();
+  const isLoggedIn = localStorage.getItem('access_token');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token'); // Adjust based on your auth logic
+    localStorage.removeItem('access_token');
     navigate('/login');
   };
 
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <span className="logo-text">AskMy<span>Doc</span></span>
-      </div>
+    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+
+      {/* Clickable animated logo */}
+      <Link href="#home" onClick={(e) => handleNavClick(e, 'home')} className="navbar-logo">
+        <span className="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
+            strokeLinejoin="round">
+            <path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" />
+            <path d="M3 10h18" />
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <path d="M16 19h6" />
+            <path d="M19 16v6" />
+          </svg>
+        </span>
+        <span className="logo-text">
+          AskMy<span>Doc</span>
+        </span>
+      </Link>
+
+      {/* Nav links with smooth scroll */}
       <ul className="navbar-links">
-        <li><Link to="/">Home</Link></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Docs</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#home" onClick={(e) => handleNavClick(e, 'home')}>Home</a></li>
+        <li><a href="#features" onClick={(e) => handleNavClick(e, 'features')}>Features</a></li>
+        <li><a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>Pricing</a></li>
+        <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a></li>
       </ul>
 
+      {/* Auth actions */}
       <div className="navbar-actions">
         {isLoggedIn ? (
           <>

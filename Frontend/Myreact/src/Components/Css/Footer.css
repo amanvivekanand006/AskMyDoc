@@ -1,103 +1,218 @@
-body {
-  overflow-x: hidden; 
-}
+/* =====================
+   CONTACT SECTION
+   Theme matches Landing.css — #490b3d / #bd1e51 palette, light background
+   ===================== */
 
-footer {
-  width: 100%; 
+.contact-section {
   position: relative;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  padding: 5rem 1.5rem 3rem;
+  font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
-  /* background: linear-gradient(to top right, #1e1e2f, #2c2c3f); */
-  /* background: #6e6e6e; */
-  background: #bd1e51;
-  color: white;
-  padding: 3rem 2rem;
-  box-sizing: border-box;
-  margin-top: auto;
-  margin-left: 0;
-  margin-right: 100px;
 }
 
-.footer-container {
-  max-width: 1200px;
+/* Radial glow — soft brand-tinted blob bottom-left */
+.contact-glow {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 55%;
+  height: 70%;
+  border-radius: 40%;
+  background: radial-gradient(ellipse at bottom left, rgba(189, 30, 81, 0.08) 0%, transparent 70%);
+  filter: blur(48px);
+  z-index: 0;
+}
+
+.contact-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
   margin: 0 auto;
   text-align: center;
 }
 
-.footer-links {
-  margin-top: 1rem;
+/* ---- Eyebrow ---- */
+.contact-eyebrow {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   gap: 1rem;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
 }
 
-.footer-links a {
-  /* color: #ccc; */
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.eyebrow-line {
+  display: block;
+  width: 3rem;
+  height: 1px;
+  background-color: #e5e7eb;
 }
 
-.footer-links a:hover {
-  /* color: #fff; */
-  color: #f1b814;
+.eyebrow-text {
+  color: #9ca3af;
 }
 
-.footer-logo {
-  font-size: 2rem;
-  font-weight: bold;
-  /* color: #fff; */
-  color: #f1b814;
+/* ---- Heading ---- */
+.contact-heading {
+  margin-top: 1rem;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #490b3d;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
-.footer-stars, .footer-blobs {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
+.contact-heading-accent {
+  color: #bd1e51;
 }
 
-.star {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle 3s infinite ease-in-out;
+/* ---- Subtext ---- */
+.contact-subtext {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.2; }
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.3;
-  z-index: 0;
-}
-
-.blob1 {
-  width: 300px;
-  height: 300px;
-  /* background: ghostwhite; */
-  background: #f1b814;
-  top: -100px;
-  left: -100px;
-}
-
-.blob2 {
-  width: 300px;
-  height: 300px;
-  /* background: #1565c0; */
-  background: #490b3d;
-  bottom: -100px;
-  right: -100px;
-}
-
-.footer-bottom {
+/* ---- CTA Button ---- */
+.contact-cta {
   margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 1.75rem;
+  border-radius: 9999px;
+  background-color: #490b3d;
+  color: #ffffff;
   font-size: 0.9rem;
-  /* color: #aaa; */
-  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 14px rgba(73, 11, 61, 0.28);
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.contact-btn:hover {
+  background-color: #bd1e51;
+  box-shadow: 0 6px 18px rgba(189, 30, 81, 0.35);
+  transform: translateY(-2px);
+}
+
+/* ---- Social Icons ---- */
+.contact-socials {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.social-link:hover {
+  background-color: rgba(73, 11, 61, 0.07);
+  color: #490b3d;
+}
+
+.social-divider {
+  display: block;
+  width: 1px;
+  height: 1.5rem;
+  background-color: #e5e7eb;
+}
+
+/* ---- Email ---- */
+.contact-email-wrap {
+  margin-top: 1.5rem;
+}
+
+.contact-email {
+  font-size: 0.875rem;
+  color: #bd1e51;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.contact-email:hover {
+  color: #490b3d;
+}
+
+/* ---- Divider ---- */
+.contact-divider {
+  margin-top: 3rem;
+  height: 1px;
+  background-color: #e5e7eb;
+}
+
+/* ---- Footer bar ---- */
+.contact-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.contact-copyright {
+  margin: 0;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.contact-footer-note {
+  margin: 0;
+  color: #d1d5db;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .contact-heading {
+    font-size: 2.5rem;
+  }
+
+  .contact-subtext {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 3.5rem 1rem 2.5rem;
+  }
+
+  .contact-heading {
+    font-size: 2rem;
+  }
+
+  .contact-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
 }
