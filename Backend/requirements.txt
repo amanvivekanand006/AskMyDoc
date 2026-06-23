@@ -30,5 +30,6 @@ pinecone==7.3.0
 
 langchain-pinecone
 langchain-huggingface
+sentence-transformers
 
 requests
