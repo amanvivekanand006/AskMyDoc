@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Css/Navbar.css';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import bot from '../assets/Bot.ai2.png';
+import bot from '../assets/BOT.ai2.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
