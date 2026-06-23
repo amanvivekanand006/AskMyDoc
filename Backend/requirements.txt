@@ -28,7 +28,8 @@ langchain-text-splitters
 
 pinecone==7.3.0
 
-langchain-google-genai==2.1.10
 langchain-pinecone
+langchain-huggingface
+sentence-transformers
 
-google-genai==1.33.0
+requests

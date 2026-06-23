@@ -29,7 +29,11 @@ const Contact = () => {
 
         {/* CTA Button */}
         <div className="contact-cta">
-          <a href="#contact" className="contact-btn">
+          <a 
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=wolvixstudio@gmail.com&su=Inquiry&body=Hello%20Wolvix%20Studio,"
+            target="_blank"
+            rel="noopener noreferrer"
+          className="contact-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
               strokeLinejoin="round">
@@ -42,14 +46,19 @@ const Contact = () => {
 
         {/* Social Icons */}
         <div className="contact-socials">
-          <a href="#" aria-label="X (Twitter)" className="social-link">
+          {/* <a href="#" aria-label="X (Twitter)" className="social-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
             </svg>
-          </a>
+          </a> */}
           <span className="social-divider" />
-          <a href="#" aria-label="Instagram" className="social-link">
+          <a 
+          href="https://www.instagram.com/wolvixstudio?igsh=bDd3bGVwNTc2Z3Nm/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram" 
+          className="social-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
@@ -58,26 +67,40 @@ const Contact = () => {
             </svg>
           </a>
           <span className="social-divider" />
-          <a href="#" aria-label="Facebook" className="social-link">
+          {/* <a href="#" aria-label="Facebook" className="social-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
             </svg>
-          </a>
+          </a> */}
         </div>
 
         {/* Email */}
         <p className="contact-email-wrap">
-          <a href="mailto:hello@askmydoc.com" className="contact-email">
-            hello@askmydoc.com
+          <a 
+           href="https://mail.google.com/mail/?view=cm&fs=1&to=wolvixstudio@gmail.com&su=Inquiry&body=Hello%20Wolvix%20Studio,"
+            target="_blank"
+            rel="noopener noreferrer"
+          className="contact-email">
+            wolvixstudio@gmail.com
           </a>
         </p>
 
         {/* Bottom bar */}
         <div className="contact-divider" />
         <div className="contact-footer">
-          <p className="contact-copyright">© {new Date().getFullYear()} AskMyDoc</p>
-          <p className="contact-footer-note">Made with AI</p>
+          {/* <p className="contact-copyright">© {new Date().getFullYear()} AskMyDoc</p> */}
+          <p className="contact-copyright">© 2026 AskMyDoc · Built with ❤️ by{" "}
+<a 
+  href="https://www.instagram.com/wolvixstudio" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  style={{ color: "#f1b814", textDecoration: "none", fontWeight: "500" }}
+>
+  Wolvix Studio
+</a></p>
+          
+          <p className="contact-copyright">Made with AI</p>
         </div>
 
       </div>

@@ -9,7 +9,7 @@ pine_cone_key = os.getenv("PINE_CONE_API_KEY")
 Gen_Ai_key = os.getenv("GEN_AI_API_KEY")
 
 
-client = genai.Client(api_key=Gen_Ai_key)
+# client = genai.Client(api_key=Gen_Ai_key)
 
 
 
@@ -97,10 +97,14 @@ def parse_uploaded_file(file_bytes: bytes, filename: str):
 @api_router.post("/Upload_file", tags=["File"])
 async def upload_file(file: UploadFile = File(...)):
     try:
-        embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/gemini-embedding-001",
-            google_api_key=Gen_Ai_key
+        # embeddings = GoogleGenerativeAIEmbeddings(
+        #     model="models/gemini-embedding-001",
+        #     google_api_key=Gen_Ai_key
+        # )
+        embeddings = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
         )
+
         vector_store = PineconeVectorStore(
             index=index,
             embedding=embeddings

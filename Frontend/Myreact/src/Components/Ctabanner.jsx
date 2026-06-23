@@ -41,7 +41,7 @@ const CTABanner = () => {
           Your documents are waiting to be <span className="cta-heading-accent">understood</span>
         </h2>
         <p className="cta-subtext">
-          Join thousands of professionals using AskMyDoc to cut through the noise.
+          Built for professionals who work with documents.
           Start free — no credit card needed.
         </p>
 

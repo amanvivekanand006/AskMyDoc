@@ -67,15 +67,20 @@ async def chat_with_context(request: ChatRequest):
     file_id = request.file_id
     messages = request.messages
 
-    llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=Gen_Ai_key
-)
+#     llm = ChatGoogleGenerativeAI(
+#     model="gemini-2.5-flash",
+#     google_api_key=Gen_Ai_key
+# )
 
-    embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/gemini-embedding-001",
-    google_api_key=Gen_Ai_key
+#     embeddings = GoogleGenerativeAIEmbeddings(
+#     model="models/gemini-embedding-001",
+#     google_api_key=Gen_Ai_key
+# )
+    
+    embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
+    
     vector_store = PineconeVectorStore(
     index=index,
     embedding=embeddings
@@ -117,10 +122,10 @@ Question:
         # content=f"""Use this content:\n{context}\n\nUser question:\n{user_question}"""
     )
     # Ask the LLM
-    # answer = ask_llama2(messages)
-    response = llm.invoke(messages[-1].content)
+    answer = ask_llama2(messages)
+    # response = llm.invoke(messages[-1].content)
 
-    answer = response.content
+    # answer = response.content
 
     return {
     "messages": [msg.dict() for msg in messages] + [{"role": "assistant", "content": answer}]

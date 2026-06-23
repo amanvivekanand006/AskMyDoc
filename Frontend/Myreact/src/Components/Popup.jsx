@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Css/Popup.css';
+import bot from '../assets/Bot.ai2.png';
 
 const FreeVersionPopup = ({ isOpen = true, onClose }) => {
   const [showPopup, setShowPopup] = useState(isOpen);
@@ -46,8 +47,8 @@ const FreeVersionPopup = ({ isOpen = true, onClose }) => {
         {/* Content */}
         <div className="popup-content">
           {/* Icon */}
-          <div className="popup-icon">
-            <svg
+          <div >
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="48"
               height="48"
@@ -62,7 +63,8 @@ const FreeVersionPopup = ({ isOpen = true, onClose }) => {
               <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
               <line x1="9" y1="9" x2="9.01" y2="9"></line>
               <line x1="15" y1="9" x2="15.01" y2="9"></line>
-            </svg>
+            </svg> */}
+            <img src={bot} alt="Logo" className="popup-logo" style={{ width: "48px", height: "48px" }}/>
           </div>
 
           {/* Header */}
