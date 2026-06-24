@@ -27,6 +27,7 @@ import requests
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.prompts import PromptTemplate
 # from google import genai
+from zoneinfo import ZoneInfo
 
 api_router = APIRouter()
 

@@ -16,4 +16,5 @@ db1 = client.user_db
 file_col = db.file_collection
 parsed_data_col  = db.parsed_data_chunks
 users_col = db1.users_collection
+users_feedback = db1.user_feedback_col
 

@@ -61,6 +61,9 @@ const FileChat = () => {
       const aiMessage = { sender: 'ai', text: response.data.messages.slice(-1)[0].content };
       setIsTyping(false);
       setMessages((prev) => [...prev, aiMessage]);
+      if (window.incrementAnswerCount) {
+        window.incrementAnswerCount();
+      }
     } catch (error) {
       console.error(error);
       setIsTyping(false);

@@ -15,9 +15,11 @@ import Testimonials from './Components/Testimonials';
 import Pricing from './Components/Pricing';
 import Ctabanner from './Components/Ctabanner';
 import Popup from './Components/Popup';
+import FeedbackPopup from './Components/Feedback';
 
 function App() {
 
+  const userId = localStorage.getItem('userId') || 'guest_user';
 
 useEffect(() => {
   axiosInstance
@@ -33,6 +35,7 @@ useEffect(() => {
 
   return (
     <Router>
+      <FeedbackPopup userId={userId} />
       <Navbar />
       <Routes>
         <Route
@@ -53,7 +56,6 @@ useEffect(() => {
         <Route path="/register" element={<RegisterComponent />} />
         <Route path="/filechat" element={<FileChat />} />
         <Route path="/popup" element={<Popup />} />
-
 
       </Routes>
       <Footer />
