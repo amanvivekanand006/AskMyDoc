@@ -19,11 +19,10 @@ from io import BytesIO
 from langchain_core.documents import Document
 from pinecone import Pinecone
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-# from langchain_google_genai import (
-#     GoogleGenerativeAIEmbeddings,
-#     ChatGoogleGenerativeAI
-# )
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import (
+    GoogleGenerativeAIEmbeddings,
+    # ChatGoogleGenerativeAI
+)
 import requests
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.prompts import PromptTemplate
@@ -47,3 +46,4 @@ api_router = APIRouter()
 # from langchain.schema import Document
 # from langchain_community.document_loaders import PyPDFLoader
 # from langchain_text_splitters import RecursiveCharacterTextSplitter
+# from langchain_huggingface import HuggingFaceEmbeddings

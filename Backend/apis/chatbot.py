@@ -72,14 +72,14 @@ async def chat_with_context(request: ChatRequest):
 #     google_api_key=Gen_Ai_key
 # )
 
-#     embeddings = GoogleGenerativeAIEmbeddings(
-#     model="models/gemini-embedding-001",
-#     google_api_key=Gen_Ai_key
-# )
-    
-    embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001",
+    google_api_key=Gen_Ai_key
 )
+    
+#     embeddings = HuggingFaceEmbeddings(
+#     model_name="sentence-transformers/all-MiniLM-L6-v2"
+# )
     
     vector_store = PineconeVectorStore(
     index=index,
