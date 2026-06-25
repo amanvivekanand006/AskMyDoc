@@ -29,8 +29,8 @@ langchain-text-splitters
 pinecone==7.3.0
 
 langchain-pinecone
-langchain-google-genai
-google-generativeai
+langchain-openai
+openai
 
 
 requests

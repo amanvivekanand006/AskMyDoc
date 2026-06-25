@@ -7,6 +7,7 @@ load_dotenv()
 
 pine_cone_key = os.getenv("PINE_CONE_API_KEY")
 Gen_Ai_key = os.getenv("GEN_AI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPEN_AI_KEY")
 
 
 # client = genai.Client(api_key=Gen_Ai_key)
@@ -97,10 +98,18 @@ def parse_uploaded_file(file_bytes: bytes, filename: str):
 @api_router.post("/Upload_file", tags=["File"])
 async def upload_file(file: UploadFile = File(...)):
     try:
-        embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/gemini-embedding-001",
-            google_api_key=Gen_Ai_key
-        )
+        embeddings = OpenAIEmbeddings(
+                model="text-embedding-3-small",
+                api_key=OPENAI_API_KEY
+            )
+        
+        
+        # embeddings = GoogleGenerativeAIEmbeddings(
+        #     model="models/gemini-embedding-001",
+        #     google_api_key=Gen_Ai_key
+        # )
+
+
         # embeddings = HuggingFaceEmbeddings(
         #     model_name="sentence-transformers/all-MiniLM-L6-v2"
         # )
@@ -127,8 +136,8 @@ async def upload_file(file: UploadFile = File(...)):
         ]
 
         splitter = RecursiveCharacterTextSplitter(
-                    chunk_size=500,
-                    chunk_overlap=100
+                    chunk_size=700,
+                    chunk_overlap=70
                     )
 
         chunks = splitter.split_documents(documents)

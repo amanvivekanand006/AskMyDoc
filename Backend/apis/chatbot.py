@@ -13,6 +13,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 pine_cone_key = os.getenv("PINE_CONE_API_KEY")
 Gen_Ai_key = os.getenv("GEN_AI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPEN_AI_KEY")
 
 pc = Pinecone(api_key=pine_cone_key)
 
@@ -72,10 +73,16 @@ async def chat_with_context(request: ChatRequest):
 #     google_api_key=Gen_Ai_key
 # )
 
-    embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/gemini-embedding-001",
-    google_api_key=Gen_Ai_key
-)
+
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        api_key=OPENAI_API_KEY
+    )
+
+#     embeddings = GoogleGenerativeAIEmbeddings(
+#     model="models/gemini-embedding-001",
+#     google_api_key=Gen_Ai_key
+# )
     
 #     embeddings = HuggingFaceEmbeddings(
 #     model_name="sentence-transformers/all-MiniLM-L6-v2"
@@ -87,7 +94,7 @@ async def chat_with_context(request: ChatRequest):
 )   
     retriever = vector_store.as_retriever(
     search_kwargs={
-        "k": 5,
+        "k": 4,
         "filter": {
             "file_id": request.file_id
         }
