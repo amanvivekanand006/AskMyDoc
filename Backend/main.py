@@ -19,15 +19,14 @@ app.include_router(feedback_router)
 
 origins = [
     "http://localhost:5173", 
+    "https://docu-intel-assignment-nxd6.vercel.app",
+        "http://localhost:5173",  # for local development
+        "http://localhost:3000",  # for local development
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://docu-intel-assignment-nxd6.vercel.app",
-        "http://localhost:5173",  # for local development
-        "http://localhost:3000",  # for local development
-    ],  
+    allow_origins=["*"],  
     allow_credentials=True, 
     allow_methods=["*"],  
     allow_headers=["*"], 
